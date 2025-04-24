@@ -1,8 +1,7 @@
 # 🧠 Juego de Memoria
 
 Encontrá todas las parejas de emoji antes de que se acabe el tiempo.
-Proyecto realizado por **David Ramírez**  
-[![GitHub](https://img.shields.io/badge/GitHub-chavow5-181717?style=flat&logo=github)](https://github.com/chavow5)
+# Proyecto realizado por **David Ramírez** [![GitHub](https://img.shields.io/badge/GitHub-chavow5-181717?style=flat&logo=github)](https://github.com/chavow5)
 
 Este es un proyecto hecho con HTML, CSS y JavaScript puro.
 ---
