@@ -9,7 +9,7 @@ Encontrá todas las parejas de emoji antes de que se acabe el tiempo.
 
 ## 🚀 Demo en vivo
 
-👉 [Ver el juego en línea](https://TU-USUARIO.github.io/NOMBRE-DEL-REPO)
+👉 [[https://github.com/chavow5/MemoryGame.git]](https://github.com/chavow5/MemoryGame.git)
 
 ---
 
