@@ -1,0 +1,156 @@
+/* Estilo general del cuerpo */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000; /* Fondo negro */
+}
+
+/* Estilo para la introducción */
+#intro {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 8px auto;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(53, 53, 53, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#intro h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+#intro p {
+    font-size: 16px;
+    color: #333;
+}
+
+#intro a {
+    color: #24292e;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#intro a:hover {
+    text-decoration: underline;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* Botón para iniciar el juego */
+#botonIniciar {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#botonIniciar:hover {
+    background-color: #0056b3;
+}
+
+/* Contenedor del juego */
+#contenedorJuego {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 90%;
+    max-width: 320px;
+    margin-bottom: 20px;
+}
+
+/* Estilo de las cartas */
+.carta {
+    height: 80px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: transparent;
+    transition: color 0.3s, transform 0.3s;
+}
+
+/* Estilo para cartas reveladas o emparejadas */
+.carta.revelada,
+.carta.emparejada {
+    color: #444;
+    transform: scale(1.1);
+}
+
+/* Mensaje final */
+#mensajeFinal {
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    color: #ff0202;
+}
+
+/* Estilo para el confeti */
+.confeti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    opacity: 0.8;
+    border-radius: 50%;
+}
+
+/* Animación del confeti */
+@keyframes confeti-animacion {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* Temporizador */
+#temporizador {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Botón para reiniciar el juego */
+#botonReiniciar {
+    display: none;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#botonReiniciar:hover {
+    background-color: #218838;
+}

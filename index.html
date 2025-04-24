@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de memoria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="intro">
+        <h2>Juego de Memoria</h2>
+        <p>
+            Encontrá todas las parejas de emoji antes de que se acabe el tiempo. <br>
+            Proyecto realizado por David Ramírez. <br>
+            <a href="https://github.com/chavow5" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="icon">
+                Visitar mi GitHub
+            </a>
+        </p>
+    </div>
+    
+    <div id="temporizador">00:40</div>
+    <button id="botonIniciar">Iniciar juego</button>
+    <div id="contenedorJuego"></div>
+    <div id="mensajeFinal">🥳🍾🍻 Ganaste 🥳🍾🍻</div>
+
+    <script>
+        const iconos = ["😀", "💻", "🚴", "🎮", "🔫", "🛞", "😀", "💻", "🚴", "🎮", "🔫", "🛞"];
+        let cartasReveladas = [];
+        let paresEncontrados = 0;
+        let juegoIniciado = false;
+
+        function desordenarArreglo(arreglo) {
+            let longitud = arreglo.length;
+            while (longitud > 0) {
+                // Elegir un índice aleatorio
+                const indiceAleatorio = Math.floor(Math.random() * longitud);
+                longitud--;
+
+                // Intercambiar el elemento actual con el elemento aleatorio
+                const temporal = arreglo[longitud];
+                arreglo[longitud] = arreglo[indiceAleatorio];
+                arreglo[indiceAleatorio] = temporal;
+            }
+        }
+
+        function crearCarta(icono) {
+            const carta = document.createElement("div");
+            carta.className = "carta";
+            carta.textContent = icono;
+            carta.onclick = () => revelarCarta(carta, icono);
+            return carta;
+        }
+
+        function revelarCarta(carta, icono) {
+            if (carta.classList.contains("revelada") || cartasReveladas.length === 2) {
+                return;
+            }
+
+            carta.classList.add("revelada");
+            cartasReveladas.push({ carta, icono });
+
+            if (cartasReveladas.length === 2) {
+                setTimeout(verificarPareja, 500);
+            }
+        }
+
+        function verificarPareja() {
+            const [primeraCarta, segundaCarta] = cartasReveladas;
+
+            if (primeraCarta.icono === segundaCarta.icono) {
+                primeraCarta.carta.classList.add("emparejada");
+                segundaCarta.carta.classList.add("emparejada");
+                paresEncontrados++;
+                if (paresEncontrados === iconos.length / 2) {
+                    document.getElementById("mensajeFinal").style.display = "block";
+                    iniciarConfeti();
+                }
+            } else {
+                primeraCarta.carta.classList.remove("revelada");
+                segundaCarta.carta.classList.remove("revelada");
+            }
+
+            cartasReveladas = [];
+        }
+
+        function iniciarConfeti() {
+            const totalConfeti = 500;
+            const duracion = 6;
+
+            document.getElementById("temporizador").style.display = "none";
+            for (let i = 0; i < totalConfeti; i++) {
+                setTimeout(() => {
+                    const confeti = document.createElement('div');
+                    confeti.classList.add('confeti');
+                    confeti.style.left = Math.random() * window.innerWidth + 'px';
+                    confeti.style.animation = `confeti-animacion ${duracion}s linear infinite`;
+                    document.body.appendChild(confeti);
+                }, (duracion / totalConfeti) * i * 1000);
+            }
+        }
+
+        function inicializarJuego() {
+            desordenarArreglo(iconos);
+            const contenedorJuego = document.getElementById("contenedorJuego");
+            iconos.forEach(icono => {
+                contenedorJuego.appendChild(crearCarta(icono));
+            });
+            iniciarTemporizador();
+        }
+
+        function iniciarTemporizador() {
+            let tiempoRestante = 30;
+            const idTemporizador = setInterval(() => {
+                if (tiempoRestante <= 0) {
+                    clearInterval(idTemporizador);
+                    finalizarJuego();
+                } else {
+                    const minutos = String(Math.floor(tiempoRestante / 60)).padStart(2, '0');
+                    const segundos = String(tiempoRestante % 60).padStart(2, '0');
+                    document.getElementById("temporizador").textContent = `${minutos}:${segundos}`;
+                    tiempoRestante--;
+                }
+            }, 1000);
+        }
+
+        function finalizarJuego() {
+            if (paresEncontrados !== iconos.length / 2) {
+                document.getElementById("contenedorJuego").style.display = "none";
+                document.getElementById("temporizador").style.display = "none";
+                document.getElementById("mensajeFinal").innerHTML = "Se ha acabado el tiempo. <br> Como premio de consolación te has ganado una cena conmigo XD";
+                document.getElementById("mensajeFinal").style.display = "block";
+                iniciarConfeti();
+            }
+        }
+
+        // Esperar clic en el botón para iniciar el juego
+        document.getElementById("botonIniciar").addEventListener("click", () => {
+            document.getElementById("botonIniciar").style.display = "none";
+            inicializarJuego();
+        });
+    </script>
+</body>
+
+</html>
